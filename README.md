@@ -1,0 +1,1 @@
+> This repo contains project and assignment related information.
