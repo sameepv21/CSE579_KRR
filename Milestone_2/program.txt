@@ -1,0 +1,11 @@
+% Question 1
+% p.
+% r:-p,q.
+
+% Question 2
+% p :- q.
+% q :- not p.
+
+% Question 3
+p:-p.
+p,q:-#true.
