@@ -1,0 +1,10 @@
+#const n = 10.
+
+% Define the cells of the chessboard in which the Queens can be placed.
+{queen_cell(R, 1..n)} = 1 :- R = 1..n.
+
+% 2 queens not in the similar column
+:- queen_cell(R1, C), queen_cell(R2, C), R1 != R2.
+
+% queens not in diagonal
+:- queen_cell(R1, C1), queen_cell(R2, C2), R1 != R2, |R1 - R2| = |C1 - C2|.
