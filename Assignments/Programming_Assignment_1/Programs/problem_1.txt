@@ -1,0 +1,20 @@
+% Define the size of the chessboard
+size(8).
+
+% Generate positions for queens ensuring they are not in the middle 4x4 square
+{ queen(X,Y) : X = 1..8, Y = 1..8, not middle(X,Y) } = 8.
+
+% Define the middle 4x4 squares
+middle(3..6,3..6).
+
+% Constraint: No two queens on the same row
+:- queen(X,Y1), queen(X,Y2), Y1 != Y2.
+
+% Constraint: No two queens on the same column
+:- queen(X1,Y), queen(X2,Y), X1 != X2.
+
+% Constraint: No two queens on the same diagonal
+:- queen(X1,Y1), queen(X2,Y2), X1 != X2, abs(X1-X2) = abs(Y1-Y2).
+
+% Display the solution.
+#show queen/2.
