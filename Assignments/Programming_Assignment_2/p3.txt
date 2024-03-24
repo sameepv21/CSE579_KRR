@@ -1,0 +1,30 @@
+% Constants
+constant(num_grippers) = 2.
+
+% Types
+block(a). block(b). block(c). block(d). block(e). block(f). block(g). block(h). block(i). block(j). block(k). block(l). block(m). block(n). block(o).
+location(table). location(a). location(b). location(c). location(d). location(e). location(f). location(g). location(h). location(i). location(j). location(k). location(l). location(m). location(n). location(o).
+
+% Initial state
+:- on(A,B,0), A != B, A != table, B != table.
+:- not on(A,B,0), block(A), location(B), A != B, A != table, B != table.
+
+% Goal
+:- not loc(A)=loc(B), A != B, A != table, B != table, on(A,B,M), M = maxstep.
+
+% Actions
+move(A,B,T) :- A != B, A != table, B != table, T = 0..maxstep-1, gripper_free(T), location(A), location(B).
+gripper_free(T) :- not move(A,B,T), not move(B,A,T).
+
+% Serializability constraints
+:- move(A,B,T), move(C,D,T), (B=C; A=D), T = 0..maxstep-1, A != B, A != table, B != table, C != D, C != table, D != table.
+
+% Scenario
+% Initial state
+on(a,table,0). on(b,a,0). on(c,b,0). on(d,c,0). on(e,d,0). on(f,table,0). on(g,f,0). on(h,g,0). on(i,h,0). on(j,i,0). on(k,j,0). on(l,k,0). on(m,l,0). on(n,m,0). on(o,n,0). loc(e)=j. loc(a)=e. loc(n)=a. loc(i)=d. loc(h)=i. loc(m)=h. loc(o)=m. loc(k)=g. loc(c)=k. loc(b)=c. loc(l)=b.
+
+% Goal
+loc(e)=j. loc(a)=e. loc(n)=a. loc(i)=d. loc(h)=i. loc(m)=h. loc(o)=m. loc(k)=g. loc(c)=k. loc(b)=c. loc(l)=b. loc(f)=table.
+
+% Maximum time step
+maxstep = 11.
