@@ -1,3 +1,0 @@
-:- not 1{on(B, LL, T)}1, block(B), location(LL), T=1..m.
-
-show on/3.
